@@ -1,7 +1,8 @@
-import torchvision
 import torch
 from .DAEMA import DenseASPPWithEMAHead
 from .LASPP import LargerASPPHead
+from . import resnet
+from torchvision.models._utils import IntermediateLayerGetter
 
 def createDenseASPPWithEMAHead(in_channels, classes):
     return DenseASPPWithEMAHead(in_channels, classes)
@@ -35,7 +36,13 @@ class EVFRNet(torch.nn.Module):
         2: After stage1, load its weights and freeze backbone
         '''
 
-        self.backbone = torchvision.models.segmentation.deeplabv3_resnet101(pretrained = False).backbone
+        backbone = resnet.__dict__['resnet101'](
+            pretrained=False,
+            replace_stride_with_dilation=[False, True, True])
+        backbone = IntermediateLayerGetter(backbone, return_layers={'layer4': 'out'})
+        self.backbone = backbone
+
+        # self.backbone = torchvision.models.segmentation.deeplabv3_resnet101(pretrained = False).backbone
         if stage==0:
             self._init_stage0()
         elif stage==1:
