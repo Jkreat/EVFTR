@@ -1,2 +1,4 @@
 ckpt/backbone_ckpt_epoch_10.pth filter=lfs diff=lfs merge=lfs -text
 ckpt/decoder1_ckpt_epoch_10.pth filter=lfs diff=lfs merge=lfs -text
+ckpt_lite/backbone_ckpt_epoch_10.pth filter=lfs diff=lfs merge=lfs -text
+ckpt_lite/decoder1_ckpt_epoch_10.pth filter=lfs diff=lfs merge=lfs -text
