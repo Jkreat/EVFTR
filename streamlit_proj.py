@@ -7,6 +7,7 @@ from EVFRTest_lite import predict as predict_lite
 import time
 import urllib
 import torch
+import sys
 
 style = '''
         <style>
@@ -94,7 +95,7 @@ if input_pass:
         button_text = {'CN': '处理', 'EN': 'Process'}
         button_pressed = st.sidebar.button(button_text[LANG])
         model_select = st.sidebar.selectbox('Select Model', ['Standard', 'Lite'])
-        device_select = st.sidebar.selectbox('Select Device', ['cuda:0', 'cuda:1'])
+        device_select = st.sidebar.selectbox('Select Device', ['cuda:0', 'cuda:1', 'cpu'])
 
 if button_pressed:
     start = time.time()
@@ -104,6 +105,8 @@ if button_pressed:
         try:
             pred = predict(img_pil_list, device=device_select, RGB=True)
         except:
+            s = sys.exc_info()
+            st.write(s)
             pred = []
         finally:
             pred_res = pred
@@ -116,6 +119,6 @@ if button_pressed:
         slot1.success(finish_text_EN)
         col2.image(pred)
     else:
-        slot1.error('Failed: CUDA out of memory ')
+        slot1.error('Failed: CUDA error!')
 
 
