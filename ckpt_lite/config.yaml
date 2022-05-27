@@ -1,0 +1,20 @@
+Model:
+    DenseASPPWithEMA
+Fold Number:
+    1
+Batch Size:
+    6
+Criterion:
+    CrossEntropyLoss
+Initial LR:
+    0.0001
+LR decay:
+    0.2
+LR update epoch:
+    5
+LR update times:
+    4
+Optimizer:
+    Adam
+Time:
+    1650005793.843734
