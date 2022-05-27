@@ -95,7 +95,7 @@ if input_pass:
         button_text = {'CN': '处理', 'EN': 'Process'}
         button_pressed = st.sidebar.button(button_text[LANG])
         model_select = st.sidebar.selectbox('Select Model', ['Standard', 'Lite'])
-        device_select = st.sidebar.selectbox('Select Device', ['cuda:0', 'cuda:1', 'cpu'])
+        device_select = st.sidebar.selectbox('Select Device', ['cpu', 'cuda:0', 'cuda:1'])
 
 if button_pressed:
     start = time.time()
